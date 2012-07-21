@@ -3,9 +3,9 @@
 use strict;
 use warnings;
 
-use Dumuzi::CLI;
+use Varys::CLI;
 
-Dumuzi::CLI->run;
+Varys::CLI->run;
 
 
 

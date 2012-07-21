@@ -34,3 +34,9 @@ plugins:
             "/":
                 users:
                     yanick: hush
+
+serializer: JSON
+
+engines:
+    JSON:
+        convert_blessed: 1

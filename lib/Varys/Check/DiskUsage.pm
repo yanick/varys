@@ -1,4 +1,4 @@
-package Dumuzi::Check::DiskUsage;
+package Varys::Check::DiskUsage;
 
 use 5.10.0;
 
@@ -10,10 +10,17 @@ use Method::Signatures;
 
 use Moose;
 
-extends 'Dumuzi::Check';
+use MooseX::ClassAttribute;
+
+extends 'Varys::Check';
+
+class_has '+store_model' => (
+    is => 'ro',
+    default => 'DiskUsage',
+);
 
 has skip => (
-    traits  => [ 'Dumuzi::Trait::Input', 'Array' ],
+    traits  => [ 'Input', 'Array' ],
     is      => 'ro',
     isa     => 'AutoArray',
     coerce  => 1,
@@ -25,14 +32,14 @@ has skip => (
 );
 
 has test_percent => (
-    traits  => [ 'Dumuzi::Trait::Input' ],
+    traits  => [ 'Input' ],
     is      => 'ro',
     isa     => 'Int',
     default => 60,
 );
 
 has partitions => (
-    traits  => [ 'Dumuzi::Trait::Info', 'Hash' ],
+    traits  => [ 'Info', 'Hash' ],
     is      => 'ro',
     isa     => 'HashRef',
     lazy    => 1,
@@ -46,7 +53,6 @@ has partitions => (
         partitions_kv => 'kv',
     },
 );
-
 
 method test {
     my @full = map  { $_->[0] } 
